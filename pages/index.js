@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import ChatRoom from "../components/ChatRoom";
+import Chatroom from "../components/chatroom";
 
 import { ChakraProvider } from '@chakra-ui/react'
 import { Grid, GridItem } from '@chakra-ui/react'
-import { Flex, Spacer } from '@chakra-ui/react'
 import { Container } from '@chakra-ui/react'
 
 // initialization
@@ -84,7 +83,7 @@ export default function Home() {
                   <h2>Chat With Friends</h2>
                   <button onClick={signOut}>Sign Out</button>
                 </nav>
-                <ChatRoom user={user} db={db} />
+                <Chatroom user={user} db={db} />
               </>
             ) : (
               <section id="sign_in">

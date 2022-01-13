@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { formatRelative } from "date-fns";
-import { Box, Button, InputGroup, Input, InputRightElement, List, ListItem, FormControl, Container, Grid, GridItem, Center } from "@chakra-ui/react";
+import { Box, Button, InputGroup, Input, InputRightElement, List, ListItem, Grid, GridItem, Center } from "@chakra-ui/react";
 
-export default function ChatRoom(props) {
+export default function Chatroom(props) {
   // constants
   const db = props.db;
   const dummySpace = useRef();
