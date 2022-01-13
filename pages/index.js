@@ -75,7 +75,7 @@ export default function Home() {
         templateColumns='repeat(5, 1fr)'
         gap={4}
       >
-        <GridItem rowSpan={1} colSpan={1} bg='tomato' overflowY='auto'>
+        <GridItem rowSpan={1} colSpan={1} bg='yellow' overflowY='auto'>
           <Container >
             {user ? (
               <>

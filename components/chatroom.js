@@ -61,13 +61,13 @@ export default function Chatroom(props) {
         <GridItem rowSpan={10} bg='tomato' overflowY="auto"
         css={{
           '&::-webkit-scrollbar': {
-            width: '8px',
+            width: '10px',
           },
           '&::-webkit-scrollbar-track': {
-            width: '6px',
+            width: '8px',
           },
           '&::-webkit-scrollbar-thumb': {
-            background: 'white',
+            background: 'black',
             borderRadius: '24px',
           },
         }}>
@@ -80,8 +80,8 @@ export default function Chatroom(props) {
                     <img
                       src={message.photoURL}
                       alt="Avatar"
-                      width={45}
-                      height={45}
+                      width={60}
+                      height={60}
                     />
                   ) : null}
                 </section>
