@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { formatRelative } from "date-fns";
+import { Box, Button, InputGroup, Input, InputRightElement, List, ListItem, FormControl, Container, Grid, GridItem, Center } from "@chakra-ui/react";
 
 export default function ChatRoom(props) {
   // constants
@@ -50,59 +51,84 @@ export default function ChatRoom(props) {
   };
 
   return (
-    <main id="chat_room">
-      <ul>
-        {messages.map((message) => (
-          <li key={message.id} className={message.uid === uid ? "sent" : "received"}>
-            <section>
-              {/* display user image */}
-              {message.photoURL ? (
-                <img
-                  src={message.photoURL}
-                  alt="Avatar"
-                  width={45}
-                  height={45}
-                />
-              ) : null}
-            </section>
+      <Grid
+        pos='fixed'
+        h='100%'
+        templateRows='repeat(12, 1fr)'
+        templateColumns='repeat(1, 1fr)'
+        gap={4}
+      >
+        <GridItem rowSpan={10} bg='tomato' overflowY="auto"
+        css={{
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            width: '6px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'white',
+            borderRadius: '24px',
+          },
+        }}>
+          <List>
+            {messages.map((message) => (
+              <ListItem key={message.id} className={message.uid === uid ? "sent" : "received"}>
+                <section>
+                  {/* display user image */}
+                  {message.photoURL ? (
+                    <img
+                      src={message.photoURL}
+                      alt="Avatar"
+                      width={45}
+                      height={45}
+                    />
+                  ) : null}
+                </section>
 
-            <section>
-              {/* display message text */}
-              <p>{message.text}</p>
+                <section>
+                  {/* display message text */}
+                  <p>{message.text}</p>
 
-              {/* display user name */}
-              {message.displayName ? <span>{message.displayName}</span> : null}
-              <br />
-              {/* display message date and time */}
-              {message.createdAt?.seconds ? (
-                <span>
-                  {formatRelative(
-                    new Date(message.createdAt.seconds * 1000),
-                    new Date()
-                  )}
-                </span>
-              ) : null}
-            </section>
-          </li>
-        ))}
-      </ul>
-
-      {/* extra space to scroll the page when a new message is sent */}
-      <section ref={dummySpace}></section>
-
-      {/* input form */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Type your message here..."
-        />
-
-        <button type="submit" disabled={!newMessage}>
-          Send
-        </button>
-      </form>
-    </main>
+                  {/* display user name */}
+                  {message.displayName ? <span>{message.displayName}</span> : null}
+                  <br />
+                  {/* display message date and time */}
+                  {message.createdAt?.seconds ? (
+                    <span>
+                      {formatRelative(
+                        new Date(message.createdAt.seconds * 1000),
+                        new Date()
+                      )}
+                    </span>
+                  ) : null}
+                </section>
+              </ListItem>
+            ))}
+          </List>
+        </GridItem>
+        <GridItem rowSpan={2} bg='transparent'>
+          {/* input form */}
+          <Center>
+            <Box boxShadow='xl' bg='white'>
+              <form onSubmit={handleSubmit}>
+                <InputGroup>
+                  <Input
+                    pr='4.5rem'
+                    placeholder='Type your message here...'
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                  />
+                  <InputRightElement width='4.5rem'>
+                    <Button h='1.75rem' size='sm' type="submit" disabled={!newMessage}>
+                      Send
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </form>
+            </Box>
+          </Center>
+        </GridItem>
+      </Grid>
   );
 }
